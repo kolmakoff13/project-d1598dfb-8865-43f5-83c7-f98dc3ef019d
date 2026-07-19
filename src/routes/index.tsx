@@ -189,7 +189,7 @@ function Home() {
           <div>
             <h1 className="text-xl font-semibold tracking-tight">РЦК ЛО Задачи</h1>
             <p className="text-sm text-muted-foreground">
-              Задачи из голоса — для рабочей команды
+              Система постановки задач
             </p>
           </div>
         </div>
