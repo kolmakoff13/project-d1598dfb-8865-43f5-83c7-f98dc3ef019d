@@ -39,13 +39,13 @@ import { exportExcel, exportWord } from "@/lib/exports";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ГолосЗадачи — задачи для команды из голосовых заметок" },
+      { title: "РЦК ЛО Задачи — задачи для команды из голосовых заметок" },
       {
         name: "description",
         content:
           "Диктуйте задачи голосом — приложение превратит речь в структурированную задачу со сроком, ответственным и статусом. Экспорт в Excel и Word.",
       },
-      { property: "og:title", content: "ГолосЗадачи — задачи для команды" },
+      { property: "og:title", content: "РЦК ЛО Задачи — задачи для команды" },
       {
         property: "og:description",
         content:
@@ -187,7 +187,7 @@ function Home() {
             <ListTodo className="h-5 w-5" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">ГолосЗадачи</h1>
+            <h1 className="text-xl font-semibold tracking-tight">РЦК ЛО Задачи</h1>
             <p className="text-sm text-muted-foreground">
               Задачи из голоса — для рабочей команды
             </p>
