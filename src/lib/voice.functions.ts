@@ -52,9 +52,23 @@ export const processVoiceTask = createServerFn({ method: "POST" })
       throw new Error(`Transcription failed: ${sttRes.status} ${t}`);
     }
     const sttJson = (await sttRes.json()) as { text: string };
-    const transcript = sttJson.text ?? "";
+    const transcript = (sttJson.text ?? "").trim();
 
-    // 2. Parse to structured task
+    // If transcript is empty, return an empty task without invoking LLM
+    if (!transcript) {
+      return {
+        transcript: "",
+        task: {
+          title: "",
+          description: "",
+          assignee: "",
+          dueDate: null,
+          priority: "medium",
+        },
+      };
+    }
+
+
     const today = new Date().toISOString().slice(0, 10);
     const chatRes = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
