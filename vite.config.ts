@@ -8,13 +8,14 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+    // The default export uses the Web `fetch(request)` handler shape, which Nitro's
+    // `node-server` preset wraps automatically via h3 — no Cloudflare runtime required.
     server: { entry: "server" },
   },
-  // Build a standalone Node.js server (Nitro `node-server` preset) so the app
-  // can run on a Linux VPS under PM2 behind Nginx. Output goes to `.output/`;
-  // start with `node .output/server/index.mjs`.
-  // NOTE: inside the Lovable sandbox this override is ignored and the build
-  // stays on Cloudflare; the node-server preset applies to local/CI builds.
+  // Build a standalone Node.js SSR server (Nitro `node-server` preset).
+  // After `npm run build`, start with:  node .output/server/index.mjs
+  // Runs on any Linux VPS (Ubuntu) behind PM2 / Nginx. No Cloudflare Workers,
+  // no cloudflare-module / cloudflare-pages runtime is used.
   nitro: {
     preset: "node-server",
     output: {
